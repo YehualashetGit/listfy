@@ -1,5 +1,6 @@
-import { Menu, X, ShoppingCart, User, Package } from 'lucide-react';
+import { Menu, X, ShoppingCart, Package } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 type NavigationProps = {
   isOpen: boolean;
@@ -7,9 +8,8 @@ type NavigationProps = {
 };
 
 const navItems = [
-  { label: 'Products', icon: <Package size={20} /> },
-  { label: 'Cart', icon: <ShoppingCart size={20} /> },
-  { label: 'Account', icon: <User size={20} /> },
+  { label: 'Products', icon: <Package size={20} />, path: '/products' },
+  { label: 'Cart', icon: <ShoppingCart size={20} />, path: '/cart' },
 ];
 
 export function Navigation({ isOpen, onToggle }: NavigationProps) {
@@ -49,13 +49,15 @@ export function Navigation({ isOpen, onToggle }: NavigationProps) {
         
         <div className="p-2">
           {navItems.map((item) => (
-            <button
+            <Link
               key={item.label}
+              to={item.path}
               className="w-full flex items-center gap-3 p-3 rounded hover:bg-accent"
+              onClick={onToggle}
             >
               {item.icon}
               {item.label}
-            </button>
+            </Link>
           ))}
         </div>
       </nav>
